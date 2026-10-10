@@ -29,3 +29,10 @@ earns its keep.
   returning every position in a large text would produce a huge array for no
   useful purpose. If you need overlapping matches, this library does not do
   that — `searchAll` reports non-overlapping occurrences only.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
